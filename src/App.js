@@ -8,20 +8,19 @@ import "firebase/analytics";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+//-------------------------------------------------------------------------
+
+// firebase configuration
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBOum-a80_YQIW43UVo8Ee9EybbrS8hND4",
-  authDomain: "sinskari101.firebaseapp.com",
-  projectId: "sinskari101",
-  storageBucket: "sinskari101.appspot.com",
-  messagingSenderId: "32306862615",
-  appId: "1:32306862615:web:adafafce5d88e33a2d9a52",
+  // Firebase API configuration
 });
 
+//Global variable
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-// const analytics = firebase.analytics();
 
+//Application head
 function App() {
   const [user] = useAuthState(auth);
 
@@ -44,6 +43,7 @@ function App() {
   );
 }
 
+// Signin function
 function SignIn() {
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -59,6 +59,7 @@ function SignIn() {
   );
 }
 
+// Signout Function
 function SignOut() {
   return (
     auth.currentUser && (
@@ -69,10 +70,11 @@ function SignOut() {
   );
 }
 
+// Chatroom Layout
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt").limit(25);
+  const query = messagesRef.orderBy("createdAt").limit(100);
 
   const [messages] = useCollectionData(query, { idField: "id" });
   console.log(messages);
@@ -120,6 +122,7 @@ function ChatRoom() {
   );
 }
 
+// Chatroom Messages layout
 function ChatMessage(props) {
   const { text, uid, photoURL, displayName } = props.message;
 
@@ -130,9 +133,7 @@ function ChatMessage(props) {
       <div className={`message ${messageClass}`}>
         <img
           className="imgPro"
-          src={
-            photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
-          }
+          src={photoURL || "https://i.imgur.com/wwMlaWu.png"}
           alt=""
         />
         <p>{text}</p>
