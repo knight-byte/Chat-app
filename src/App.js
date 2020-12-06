@@ -30,10 +30,10 @@ function App() {
         <h1 className="headS">
           <img
             className="imgHead"
-            src="https://i.imgur.com/JvqzvZA.jpg"
+            src="https://i.imgur.com/wwMlaWu.png"
             alt=""
           />
-          <p>Sinskari</p>
+          <p>Default Group name</p>
         </h1>
         <SignOut />
       </header>
